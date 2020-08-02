@@ -18,7 +18,7 @@ app.get("/", (request, response) => {
   response.json({ info: "It works!" });
 });
 app.get("/test_query", (request, response) => {
-  let q = "SELECT * FROM data ORDER BY id ASC";
+  let q = "SELECT * FROM users ORDER BY id ASC";
   pool.query(q, (error, results) => {
     if (error) {
       throw error;
