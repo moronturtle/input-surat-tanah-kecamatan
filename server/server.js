@@ -3,22 +3,21 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const port = 3001;
-const Pool = require("pg").Pool;
-const pool = new Pool({
-  host: "postgres",
-  port: 5432,
-  user: "postgres",
-  password: "postgres",
-  database: "db",
-});
+
+const pool = require("./database");
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use("/authentication", require("./routes/jwtAuth"));
+app.use("/dashboard", require("./routes/dashboard"));
+
 app.get("/", (request, response) => {
   response.json({ info: "It works!" });
 });
 app.get("/test_query", (request, response) => {
-  let q = "SELECT * FROM users ORDER BY id ASC";
+  let q = "SELECT * FROM users ORDER BY user_id ASC";
   pool.query(q, (error, results) => {
     if (error) {
       throw error;
