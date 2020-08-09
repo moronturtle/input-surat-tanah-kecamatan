@@ -32,9 +32,12 @@ const Dashboard = ({ setAuth }) => {
     }
   };
 
+  useEffect(() => {
+    getProfile();
+  }, []);
+
   return (
     <div>
-      <h1>anjir</h1>
       <h1 className="mt-5">Dashboard</h1>
       <h2>Welcome {name}</h2>
       <button onClick={(e) => logout(e)} className="btn btn-primary">
